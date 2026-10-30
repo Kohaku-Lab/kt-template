@@ -22,6 +22,11 @@ dev = [
 [tool.setuptools.packages.find]
 include = ["kt_template*"]
 
+[tool.ruff.lint]
+preview = true
+explicit-preview-rules = true
+select = ["F401", "F841", "PLW1514"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests/unit"]
 pythonpath = ["."]
