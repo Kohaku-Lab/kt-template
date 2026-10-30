@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kt-template"
+version = "0.2.0"
+description = "Starter KohakuTerrarium package with creature, terrarium, and module templates"
+requires-python = ">=3.10"
+dependencies = ["kohakuterrarium>=2.2.0"]
+
+[project.optional-dependencies]
+dev = [
+    "black",
+    "packaging",
+    "pytest",
+    "pytest-asyncio",
+    "pyyaml",
+    "ruff",
+]
+
+[tool.setuptools.packages.find]
+include = ["kt_template*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests/unit"]
+pythonpath = ["."]
+addopts = "--import-mode=importlib"
+asyncio_mode = "auto"

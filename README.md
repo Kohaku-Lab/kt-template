@@ -63,10 +63,40 @@ kt run @kt-template/creatures/template-creature
 kt terrarium run @kt-template/terrariums/template-team
 ```
 
+## Layout and tests
+
+The package follows the same conventions as the KohakuTerrarium core:
+
+- One responsibility per module. A family of files that share a prefix becomes a
+  sub-package with the prefix dropped (`kt_template/tools/package_tool.py`, not
+  `kt_template/package_tool.py`).
+- Files stay under 500 statements (imports and docstrings excluded); 1000 is the
+  hard limit.
+- Imports sit at the top of the module, grouped as standard library, third party,
+  `kohakuterrarium`, then this package. Optional dependencies are the only
+  exception.
+- Tests mirror the package: `tests/unit/<area>/test_<module>.py` tests
+  `kt_template/<area>/<module>.py`, and each asserts behaviour (the output a tool
+  returns, the line an output module writes), not the shape of an object.
+- `tests/unit/test_manifest.py` checks that every module the manifest advertises
+  imports, that the creature and terrarium templates build against a
+  `ScriptedLLM`, and that the manifest, `pyproject.toml` and the framework pin agree.
+
+Run the checks the CI workflow runs:
+
+```bash
+pip install -e ".[dev]"
+ruff check . && black --check . && pytest
+```
+
+The package requires KohakuTerrarium `>=2.2.0` (`framework:` in `kohaku.yaml` and
+the dependency in `pyproject.toml`).
+
 ## How to customize
 
-1. Rename the package in `kohaku.yaml`.
-2. Rename `kt_template/` to your own Python package name.
+1. Rename the package in `kohaku.yaml` and `pyproject.toml`.
+2. Rename `kt_template/` to your own Python package name (and the matching
+   `tests/unit/` module imports).
 3. Rename the creature and terrarium folders.
 4. Update `module:` paths in creature configs if you move files.
 5. Replace prompt and memory content with your actual persona and workflow.
