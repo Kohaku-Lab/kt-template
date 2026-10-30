@@ -38,9 +38,10 @@ controller:
   # Valid values include: bracket, xml, native.
   tool_format: bracket
 
-  # dynamic = one-line tool list + use info on demand
-  # static  = full docs in the system prompt up front
-  skill_mode: dynamic
+  # brief    = one-line tool list, details on demand
+  # standard = tool list plus usage tier (the default)
+  # full     = full docs in the system prompt up front
+  tool_doc_mode: standard
 
   include_tools_in_prompt: true
   include_hints_in_prompt: true
@@ -123,8 +124,6 @@ triggers:
 # Built-ins can be declared in shorthand or full form.
 tools:
   - name: info
-    type: builtin
-  - name: think
     type: builtin
   - name: read
     type: builtin

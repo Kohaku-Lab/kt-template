@@ -21,8 +21,6 @@ terrarium:
       tool_format: bracket
     system_prompt_file: prompts/root.md
     tools:
-      - name: think
-        type: builtin
       - name: ask_user
         type: builtin
 

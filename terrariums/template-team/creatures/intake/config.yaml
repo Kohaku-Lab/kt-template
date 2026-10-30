@@ -16,8 +16,6 @@ controller:
 system_prompt_file: prompts/system.md
 
 tools:
-  - name: think
-    type: builtin
   - name: info
     type: builtin
   - name: ask_user
